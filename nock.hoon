@@ -91,13 +91,20 @@
     ?~  second  ~
     [~ f.formula (need first) (need second)]
   ::
-      :: *[s 11 [f g] h] → *[[*[s g] *[s h]] 0 3]
-      [%11 fg=* h=*]
-      =/  first=(unit *)  (run-nock subject +:fg.formula)
-      ?~  first  ~
-      =/  second=(unit *)  (run-nock subject h.formula)
-      ?~  second  ~
-      (run-nock [(need first) (need second)] [0 3])
+      :: *[s 11 [f g] h] -> *[[*[s g] *[s h]] 0 3]
+      [%11 [f=* g=*] h=*]
+    =/  first=(unit *)  (run-nock subject g.formula)
+    ?~  first  ~
+    =/  second=(unit *)  (run-nock subject h.formula)
+    ?~  second  ~
+    (run-nock [(need first) (need second)] [0 3])
+  ::
+      :: *[s 11 f g] -> *[s g]
+      [%11 f=* g=*]
+    =/  first=(unit *)  (run-nock subject g.formula)
+    ?~  first  ~
+    (run-nock (need first) [0 3])
+  ::
   ==
 ++  frag
   |=  [axis=@ noun=*]
